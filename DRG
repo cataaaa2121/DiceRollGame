@@ -1,0 +1,49 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class DiceRoller {
+public static void main(String[] args) {
+try (Scanner scanner = new Scanner(System.in)) {
+Random random = new Random();
+
+        System.out.println("Welcome to the Dice Roller!");
+
+        // Prompt user for number of dice
+        System.out.print("How many dice would you like to roll? ");
+        int numDice = scanner.nextInt();
+
+        // Prompt user for number of sides on each dice
+        System.out.print("How many sides do the dice have? ");
+        int numSides = scanner.nextInt();
+
+        // Roll the dice and display the results
+        rollDice(numDice, numSides, random);
+
+        // Prompt user to roll again or exit
+        while (true) {
+            System.out.print("Roll again? (y/n) ");
+            String input = scanner.next();
+
+            if (input.equalsIgnoreCase("y")) {
+                rollDice(numDice, numSides, random);
+            } else if (input.equalsIgnoreCase("n")) {
+                System.out.println("Thanks for using the Dice Roller!");
+                break;
+            }
+        }
+    }
+}
+
+private static void rollDice(int numDice, int numSides, Random random) {
+    int total = 0;
+
+    System.out.println("\nRolling the dice...");
+    for (int i = 1; i <= numDice; i++) {
+        int roll = random.nextInt(numSides) + 1;
+        total += roll;
+        System.out.printf("Dice %d: %d\n", i, roll);
+    }
+
+    System.out.printf("Total value: %d\n", total);
+}
+}
